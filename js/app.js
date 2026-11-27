@@ -310,6 +310,16 @@
     heroImg.style.transition = 'opacity ' + FADE_MS + 'ms ease, transform 3600ms ease-out';
     heroText.style.transition = 'opacity ' + FADE_MS + 'ms ease, transform ' + FADE_MS + 'ms ease';
 
+    // muat gambar dulu sebelum ditampilkan, supaya tidak pernah muncul teks alt / area kosong saat pergantian slide
+    function preload(path) {
+      return new Promise(function (resolve) {
+        var im = new Image();
+        im.onload = im.onerror = function () { resolve(); };
+        im.src = assetUrl(path);
+      });
+    }
+    slides.forEach(function (s) { preload(s.image); });
+
     function render() {
       var s = slides[slideIdx];
       heroImg.src = assetUrl(s.image);
@@ -318,6 +328,14 @@
       var cta = byId('hero-slide-cta');
       cta.href = routeHref(s.ctaRoute);
       cta.querySelector('span').textContent = s.ctaLabel;
+      // tombol kedua selalu tujuan yang berbeda dari tombol utama (tidak ada dua tombol "Lihat Kegiatan")
+      var cta2 = byId('hero-slide-cta2');
+      if (cta2) {
+        var alt = s.ctaRoute === 'kegiatan' ? { route: 'tentang', label: 'Kenali Kami' } : { route: 'kegiatan', label: 'Lihat Kegiatan' };
+        cta2.href = routeHref(alt.route);
+        cta2.setAttribute('data-route', alt.route);
+        cta2.querySelector('span').textContent = alt.label;
+      }
       byId('hero-dots').innerHTML = slides.map(function (_, i) {
         return '<button type="button" data-slide-dot="' + i + '" class="h-2 rounded-full transition-all cursor-pointer ' + (i === slideIdx ? 'w-6 bg-white' : 'w-2 bg-white/40') + '" aria-label="Slide ' + (i + 1) + '"></button>';
       }).join('');
@@ -328,6 +346,7 @@
       if (busy || next === slideIdx) return;
       if (reduced) { slideIdx = next; render(); return; }
       busy = true;
+      preload(slides[next].image).then(function () {
       heroImg.style.opacity = '0';
       heroText.style.opacity = '0';
       heroText.style.transform = 'translateY(8px)';
@@ -346,6 +365,7 @@
         };
         if (heroImg.complete) show(); else { heroImg.onload = show; heroImg.onerror = show; }
       }, FADE_MS);
+      });
     }
 
     function stop() { clearInterval(timer); timer = null; }
