@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" fill="none">
+  <rect width="1600" height="900" fill="#121212"/>
+  <g stroke="#1F1F1F" stroke-width="1">
+    <line x1="400" y1="0" x2="400" y2="900"/>
+    <line x1="800" y1="0" x2="800" y2="900"/>
+    <line x1="1200" y1="0" x2="1200" y2="900"/>
+    <line x1="0" y1="300" x2="1600" y2="300"/>
+    <line x1="0" y1="600" x2="1600" y2="600"/>
+  </g>
+  <polygon points="1220,140 1480,400 1220,660 960,400" stroke="#2A2A2A" stroke-width="1.5" fill="none"/>
+  <polygon points="1220,220 1400,400 1220,580 1040,400" stroke="#262626" stroke-width="1" fill="none"/>
+  <path d="M36 72 V36 H72 M1528 36 H1564 V72 M36 828 V864 H72 M1528 864 H1564 V828" stroke="#404040" stroke-width="1.5"/>
+  <text x="1520" y="832" text-anchor="end" fill="#737373" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2.5">HERO PLACEHOLDER 16:9 · GANTI FOTO @STTSILADHARMA</text>
+</svg>

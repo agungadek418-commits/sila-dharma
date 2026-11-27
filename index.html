@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STT Sila Dharma — Br. Bukit Sakti, Desa Lokapaksa, Seririt</title>
+  <meta name="description" content="Website Resmi STT Sila Dharma (Seke Truna Truni) Banjar Bukit Sakti, Desa Lokapaksa, Kecamatan Seririt, Kabupaten Buleleng, Bali." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="icon" type="image/png" href="/assets/images/logo/logo-stt.png" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-white text-[#0A0A0A] pb-16 lg:pb-0" data-page="beranda">
+  <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+  <header class="sticky top-0 z-50 bg-[#0A0A0A] text-white border-b border-[#262626]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 md:h-20 flex items-center justify-between gap-4">
+      <a href="/" data-route="beranda" class="flex items-center gap-3 min-w-0">
+        <img data-asset="/assets/images/logo/logo-stt.png" alt="Logo STT Sila Dharma" class="w-11 h-11 shrink-0 object-contain" />
+        <div class="leading-tight truncate">
+          <span class="block text-sm sm:text-base font-extrabold tracking-tight text-white truncate">STT Sila Dharma</span>
+          <span class="block text-[11px] sm:text-xs text-[#A3A3A3] truncate">Br. Bukit Sakti, Desa Lokapaksa · Seririt</span>
+        </div>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6" aria-label="Navigasi Utama">
+        <a href="/" data-route="beranda" class="desktop-nav-link active">Beranda</a>
+        <a href="/tentang/" data-route="tentang" class="desktop-nav-link">Profil STT</a>
+        <a href="/organisasi/" data-route="organisasi" class="desktop-nav-link">Struktur</a>
+        <a href="/kegiatan/" data-route="kegiatan" class="desktop-nav-link">Kegiatan</a>
+        <a href="/galeri/" data-route="galeri" class="desktop-nav-link">Galeri</a>
+        <a href="/berita/" data-route="berita" class="desktop-nav-link">Berita</a>
+        <a href="/anggota/" data-route="anggota" class="desktop-nav-link">Anggota</a>
+        <a href="/kontak/" data-route="kontak" class="desktop-nav-link">Aspirasi &amp; Kontak</a>
+      </nav>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="https://www.instagram.com/sttsiladharma/" target="_blank" rel="noopener noreferrer"
+           class="hidden sm:inline-flex items-center gap-1.5 border border-white/30 rounded-lg px-3 py-1.5 text-xs font-semibold text-white hover:bg-white hover:text-[#0A0A0A] transition-colors">
+          <i data-lucide="instagram" class="w-3.5 h-3.5"></i><span>@sttsiladharma</span>
+        </a>
+        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-white hover:opacity-75 cursor-pointer"
+                aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#171717] border-t border-[#262626]">
+      <nav class="max-w-7xl mx-auto px-5 py-4 flex flex-col" aria-label="Navigasi Mobile">
+        <a href="/" data-route="beranda" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-white">Beranda</a>
+        <a href="/tentang/" data-route="tentang" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Profil STT Sila Dharma</a>
+        <a href="/organisasi/" data-route="organisasi" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Struktur Organisasi (SOTK)</a>
+        <a href="/kegiatan/" data-route="kegiatan" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Kegiatan &amp; Agenda</a>
+        <a href="/galeri/" data-route="galeri" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Galeri Dokumentasi</a>
+        <a href="/berita/" data-route="berita" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Berita &amp; Pengumuman</a>
+        <a href="/anggota/" data-route="anggota" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Direktori Anggota</a>
+        <a href="/kontak/" data-route="kontak" class="drawer-link py-3 border-b border-[#262626] text-sm font-semibold text-[#A3A3A3]">Aspirasi &amp; Kontak Resmi</a>
+        <a href="https://www.instagram.com/sttsiladharma/" target="_blank" rel="noopener noreferrer"
+           class="mt-4 inline-flex items-center justify-center gap-2 bg-white text-[#0A0A0A] rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="instagram" class="w-4 h-4"></i><span>Instagram @sttsiladharma</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+      <!-- HERO -->
+      <section class="hero-stage" aria-label="Banner utama">
+        <div class="hero-box relative overflow-hidden bg-[#0A0A0A] text-white flex items-end">
+          <img id="hero-slide-img" data-asset="assets/images/hero/hero-slide-1.svg" alt="Banner STT Sila Dharma" class="absolute inset-0 w-full h-full object-cover opacity-80" />
+          <div class="hero-shade absolute inset-0"></div>
+          <div class="hero-copy relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8">
+            <span class="hero-badge">Banjar Bukit Sakti · Desa Lokapaksa · Seririt</span>
+            <h1 id="hero-slide-title" class="hero-title whitespace-pre-line">Selamat Datang
+Website Resmi STT Sila Dharma</h1>
+            <p id="hero-slide-subtitle" class="hero-sub">Seke Truna Truni Banjar Bukit Sakti, Desa Lokapaksa, Kecamatan Seririt — Satu Semangat, Satu Kebersamaan.</p>
+            <div class="mt-7 flex flex-wrap items-center gap-3">
+              <a id="hero-slide-cta" href="/tentang/" data-route="tentang" class="btn-gold"><span>Kenali Kami</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+              <a href="/kegiatan/" data-route="kegiatan" class="btn-ghost"><span>Lihat Kegiatan</span></a>
+            </div>
+          </div>
+          <div class="hero-controls hero-controls--dots">
+            <div id="hero-dots" class="flex items-center gap-1.5"></div>
+          </div>
+          <div class="poleng-strip" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- 8-ICON QUICK MENU GRID (2x4 mobile, 8-col desktop) -->
+      <section class="quick-dock max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-4 lg:grid-cols-8 gap-y-6 gap-x-3 sm:gap-5">
+          <a href="/tentang/" data-route="tentang" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="landmark" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Profil STT</span>
+          </a>
+          <a href="/organisasi/" data-route="organisasi" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="network" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Struktur</span>
+          </a>
+          <a href="/kegiatan/" data-route="kegiatan" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="calendar-days" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Kegiatan</span>
+          </a>
+          <a href="/galeri/" data-route="galeri" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="image" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Galeri</span>
+          </a>
+          <a href="/berita/" data-route="berita" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="megaphone" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Berita</span>
+          </a>
+          <a href="/anggota/" data-route="anggota" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="users" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Anggota</span>
+          </a>
+          <a href="#peta-wilayah" id="quick-map-btn" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="map-pin" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Peta Banjar</span>
+          </a>
+          <a href="/kontak/" data-route="kontak" class="quick-menu-tile">
+            <span class="quick-menu-icon"><i data-lucide="message-square-text" class="w-6 h-6"></i></span>
+            <span class="text-xs font-semibold leading-tight">Aspirasi</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- SAMBUTAN KETUA STT SILA DHARMA -->
+      <section class="py-12 sm:py-16 bg-[#F5F5F5] border-y border-[#E5E5E5]">
+        <div class="max-w-3xl mx-auto px-5 sm:px-6 text-center reveal">
+          <div class="w-36 h-36 sm:w-44 sm:h-44 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md bg-[#E5E5E5]">
+            <img data-asset="assets/images/members/ketua-placeholder.svg" alt="Foto Ketua STT Sila Dharma" class="w-full h-full object-cover" />
+          </div>
+          <p class="mt-6 text-lg sm:text-xl font-bold text-[#404040]">Sambutan Ketua STT Sila Dharma</p>
+          <h2 class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A] uppercase">[NAMA KETUA STT SILA DHARMA]</h2>
+          <p class="mt-1 text-xs sm:text-sm font-bold tracking-widest uppercase text-[#404040]">KETUA STT · BANJAR BUKIT SAKTI, DESA LOKAPAKSA</p>
+          <p class="mt-5 text-sm sm:text-base text-[#404040] leading-relaxed">
+            &ldquo;Om Swastyastu. Selamat datang di portal resmi Seke Truna Truni (STT) Sila Dharma Banjar Bukit Sakti, Desa Lokapaksa, Kecamatan Seririt. Website ini kami hadirkan sebagai pusat informasi kegiatan, arsip dokumentasi, dan jembatan kebersamaan generasi muda dalam menjaga adat serta tradisi.&rdquo;
+          </p>
+          <div class="mt-6">
+            <a href="/tentang/" data-route="tentang" class="btn-outline !py-2.5 !px-5 text-xs">Baca Profil &amp; Sejarah STT</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- PETA WILAYAH INTERAKTIF (BANJAR BUKIT SAKTI, DESA LOKAPAKSA, SERIRIT) -->
+      <section id="peta-wilayah" class="py-14 sm:py-20 bg-white border-b border-[#E5E5E5]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A] uppercase">PETA WILAYAH</h2>
+            <p class="mt-2 text-sm sm:text-base text-[#404040]">
+              Menampilkan Peta Interaktif <em>Interest Point</em> Banjar Bukit Sakti, Desa Lokapaksa, Kecamatan Seririt, Buleleng
+            </p>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden border border-[#E5E5E5] shadow-sm bg-[#171717]">
+            <!-- Floating Top-Left Search & Filter (matching Screenshot 3) -->
+            <div class="absolute top-3 left-3 z-[400] flex flex-col gap-2 w-[210px] sm:w-[250px]">
+              <div class="relative">
+                <label for="map-search-input" class="sr-only">Telusuri Peta</label>
+                <input id="map-search-input" type="search" placeholder="Telusuri Peta..."
+                       class="w-full bg-white text-[#0A0A0A] text-xs sm:text-sm rounded-lg pl-3 pr-8 py-2.5 shadow-md border border-[#E5E5E5] focus:outline-none focus:border-[#0A0A0A]" />
+                <i data-lucide="search" class="w-4 h-4 text-[#404040] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+              </div>
+              <label for="map-category-select" class="sr-only">Filter Lokasi Peta</label>
+              <select id="map-category-select"
+                      class="w-full bg-white text-[#0A0A0A] text-xs sm:text-sm font-medium rounded-lg px-3 py-2.5 shadow-md border border-[#E5E5E5] focus:outline-none focus:border-[#0A0A0A]">
+                <option value="Semua">Lihat Semua</option>
+                <option value="Balai Banjar">Balai Banjar</option>
+                <option value="Pura &amp; Adat">Pura &amp; Adat</option>
+                <option value="Fasilitas Pemuda">Fasilitas Pemuda</option>
+                <option value="Wilayah Desa">Wilayah Desa</option>
+              </select>
+            </div>
+
+            <!-- Floating Top-Right Zoom Controls -->
+            <div class="absolute top-3 right-3 z-[400] flex flex-col bg-white rounded-lg shadow-md border border-[#E5E5E5] overflow-hidden">
+              <button id="map-zoom-in" type="button" class="w-9 h-9 flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] border-b border-[#E5E5E5] cursor-pointer" aria-label="Perbesar peta">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+              <button id="map-zoom-out" type="button" class="w-9 h-9 flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] border-b border-[#E5E5E5] cursor-pointer" aria-label="Perkecil peta">
+                <i data-lucide="minus" class="w-4 h-4"></i>
+              </button>
+              <button id="map-recenter" type="button" class="w-9 h-9 flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] cursor-pointer" aria-label="Pusatkan ke Desa Lokapaksa">
+                <i data-lucide="crosshair" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <!-- Floating Bottom-Left Layer Toggle (Satellite / Peta Jalan) -->
+            <div class="absolute bottom-4 left-3 z-[400] flex items-center gap-2">
+              <button id="map-layer-toggle" type="button"
+                      class="bg-[#0A0A0A]/90 text-white border border-white/60 rounded-lg px-3.5 py-2 text-xs font-bold shadow-md hover:bg-[#0A0A0A] cursor-pointer inline-flex items-center gap-2">
+                <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                <span id="map-layer-label">Mode: Satelit</span>
+              </button>
+            </div>
+
+            <!-- Leaflet Map Container (Explicit Height Required) -->
+            <div id="banjar-map" style="height: 430px; width: 100%;"></div>
+          </div>
+          <p class="mt-3 text-xs text-[#404040] text-center">
+            Koordinat berpusat di Desa Lokapaksa, Kec. Seririt, Kab. Buleleng (8°11&apos;59&quot;S, 114°55&apos;16&quot;E). Pin Balai Banjar Bukit Sakti dapat disesuaikan pada <code class="bg-[#F5F5F5] px-1.5 py-0.5 rounded">js/data.js</code>.
+          </p>
+        </div>
+      </section>
+
+      <!-- SOTK — STRUKTUR ORGANISASI & TATA KERJA (Horizontal Slider Matching Screenshot 2) -->
+      <section class="py-14 sm:py-20 bg-[#F5F5F5] border-b border-[#E5E5E5]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="text-center max-w-2xl mx-auto reveal">
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A]">SOTK</h2>
+            <p class="mt-1.5 text-sm sm:text-base text-[#404040]">
+              Struktur Organisasi dan Tata Kerja STT Sila Dharma Banjar Bukit Sakti
+            </p>
+          </div>
+
+          <div class="mt-7 flex items-center justify-between mb-4">
+            <button id="sotk-prev" type="button" class="w-10 h-10 rounded-full border border-[#E5E5E5] bg-white text-[#0A0A0A] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white transition-colors cursor-pointer" aria-label="Geser kiri">
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </button>
+            <span class="text-xs font-semibold uppercase tracking-widest text-[#404040]">Pengurus Periode [202X – 202X]</span>
+            <button id="sotk-next" type="button" class="w-10 h-10 rounded-full border border-[#E5E5E5] bg-white text-[#0A0A0A] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white transition-colors cursor-pointer" aria-label="Geser kanan">
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div id="home-sotk-slider" class="sotk-scroll"></div>
+
+          <div class="mt-6">
+            <a href="/organisasi/" data-route="organisasi" class="btn-outline w-full">Lihat Semua Pengurus &amp; Bidang</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- DATA KEANGGOTAAN STT (Matching "Administrasi Penduduk" in Screenshot 2) -->
+      <section class="py-14 sm:py-20 bg-white border-b border-[#E5E5E5]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center reveal">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#0A0A0A]">Data Keanggotaan STT</h2>
+          <p class="mt-2 text-sm sm:text-base text-[#404040] max-w-xl mx-auto">
+            Informasi ringkas data anggota dan struktur bidang Seke Truna Truni Sila Dharma Banjar Bukit Sakti, Desa Lokapaksa.
+          </p>
+          <div id="home-stats-grid" class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8"></div>
+          <p class="mt-6 text-xs text-[#A3A3A3]">Angka keanggotaan bertanda [XX] adalah placeholder dan dapat diperbarui sesuai data resmi organisasi.</p>
+        </div>
+      </section>
+
+      <!-- KEGIATAN & BERITA TERBARU -->
+      <section class="py-14 sm:py-20 bg-[#F5F5F5] border-b border-[#E5E5E5]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-widest text-[#404040]">AGENDA &amp; INFORMASI</p>
+              <h2 class="mt-1 text-2xl sm:text-3xl font-extrabold text-[#0A0A0A]">Kegiatan Terbaru</h2>
+            </div>
+            <a href="/kegiatan/" data-route="kegiatan" class="text-xs font-bold uppercase tracking-wider text-[#0A0A0A] underline">Lihat Semua</a>
+          </div>
+          <div id="home-events-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+      </section>
+    
+  </main>
+
+  <footer class="bg-[#0A0A0A] text-white border-t border-[#262626]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-14 pb-10">
+      <div class="pb-10 border-b border-[#262626]">
+        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#A3A3A3]">STT SILA DHARMA · BR. BUKIT SAKTI, DESA LOKAPAKSA</p>
+        <p class="mt-3 text-xl sm:text-2xl md:text-3xl font-extrabold text-white max-w-3xl leading-snug">
+          &ldquo;BERSAMA MEMBANGUN KEBERSAMAAN DAN MENJAGA TRADISI.&rdquo;
+        </p>
+      </div>
+      <div class="py-10 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-[#262626] text-sm">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3">
+            <img data-asset="/assets/images/logo/logo-stt.png" alt="Logo STT Sila Dharma" class="w-14 h-14 object-contain" />
+            <div>
+              <p class="font-extrabold tracking-wide">STT SILA DHARMA</p>
+              <p class="text-xs text-[#A3A3A3]">Banjar Bukit Sakti, Desa Lokapaksa, Seririt</p>
+            </div>
+          </div>
+          <p class="mt-4 text-xs text-[#A3A3A3] leading-relaxed max-w-sm">
+            Organisasi Seke Truna Truni di Desa Lokapaksa, Kecamatan Seririt, Kabupaten Buleleng, Bali.
+          </p>
+          <a href="https://www.instagram.com/sttsiladharma/" target="_blank" rel="noopener noreferrer"
+             class="mt-4 inline-flex items-center gap-2 border border-white/30 rounded-lg px-3.5 py-2 text-xs font-bold text-white hover:bg-white hover:text-[#0A0A0A] transition-colors">
+            <i data-lucide="instagram" class="w-4 h-4"></i><span>@sttsiladharma</span>
+          </a>
+        </div>
+        <div class="md:col-span-3">
+          <p class="text-xs font-bold uppercase tracking-widest text-white">Menu Utama</p>
+          <ul class="mt-3 space-y-2 text-xs text-[#A3A3A3]">
+            <li><a href="/" data-route="beranda" class="hover:text-white">Beranda</a></li>
+            <li><a href="/tentang/" data-route="tentang" class="hover:text-white">Profil STT</a></li>
+            <li><a href="/organisasi/" data-route="organisasi" class="hover:text-white">Struktur Organisasi</a></li>
+            <li><a href="/kegiatan/" data-route="kegiatan" class="hover:text-white">Kegiatan</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4">
+          <p class="text-xs font-bold uppercase tracking-widest text-white">Tautan &amp; Alamat</p>
+          <ul class="mt-3 space-y-2 text-xs text-[#A3A3A3]">
+            <li><a href="/galeri/" data-route="galeri" class="hover:text-white">Galeri Dokumentasi</a></li>
+            <li><a href="/berita/" data-route="berita" class="hover:text-white">Berita &amp; Pengumuman</a></li>
+            <li><a href="/anggota/" data-route="anggota" class="hover:text-white">Direktori Anggota</a></li>
+            <li class="pt-1 text-[#D4D4D4]">Br. Bukit Sakti, Desa Lokapaksa, Kec. Seririt, Kab. Buleleng, Bali 81153</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-[#A3A3A3]">
+        <p>&copy; 2026 STT SILA DHARMA — Banjar Bukit Sakti, Desa Lokapaksa.</p>
+        <p>Instagram Resmi: <a href="https://www.instagram.com/sttsiladharma/" target="_blank" rel="noopener noreferrer" class="text-white underline">@sttsiladharma</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="mobile-bottom-nav lg:hidden" aria-label="Navigasi Bawah Mobile">
+    <div class="grid grid-cols-4 max-w-md mx-auto">
+      <a href="/" data-route="beranda" class="bottom-nav-item active">
+        <i data-lucide="home" class="w-5 h-5"></i><span>Beranda</span>
+      </a>
+      <a href="/kontak/" data-route="kontak" class="bottom-nav-item">
+        <i data-lucide="clipboard-list" class="w-5 h-5"></i><span>Aspirasi</span>
+      </a>
+      <a href="/berita/" data-route="berita" class="bottom-nav-item">
+        <i data-lucide="newspaper" class="w-5 h-5"></i><span>Berita</span>
+      </a>
+      <a href="/galeri/" data-route="galeri" class="bottom-nav-item">
+        <i data-lucide="image" class="w-5 h-5"></i><span>Galeri</span>
+      </a>
+    </div>
+  </nav>
+
+  <button id="back-to-top" type="button" class="back-to-top" aria-label="Kembali ke atas">
+    <i data-lucide="arrow-up" class="w-4 h-4"></i>
+  </button>
+
+  <script src="/js/assets-map.js"></script>
+  <script src="/js/data.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
